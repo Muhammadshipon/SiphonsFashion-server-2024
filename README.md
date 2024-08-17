@@ -6,10 +6,7 @@ This is the backend application for the Siphons Fashion project, built with Node
 - [Installation](#installation)
 - [Usage](#usage)
 - [Features](#features)
-- [Project Structure](#project-structure)
-- [Deployment](#deployment)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Installation
 

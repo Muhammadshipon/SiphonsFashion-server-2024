@@ -24,7 +24,7 @@ const client = new MongoClient(uri, {
 async function run() {
     try {
         const productsCollection = client.db('SiphonsFashion').collection('products');
-
+        const reviewsCollection = client.db('SiphonsFashion').collection('reviews')
         // Get all products with filtering, sorting, and pagination
         app.get('/products', async (req, res) => {
             const { page = 1, limit = 10, search = '', sort = '', seller, category, priceRange } = req.query;
@@ -72,6 +72,14 @@ async function run() {
         app.get('/all-products', async (req, res) => {
      
           const cursor = productsCollection.find();
+          const result = await cursor.toArray();
+          res.send(result);
+      })   
+
+
+        app.get('/reviews', async (req, res) => {
+     
+          const cursor = reviewsCollection.find();
           const result = await cursor.toArray();
           res.send(result);
       })   

@@ -13,7 +13,7 @@ app.use(cors());
               //  mongodb database setup 
 
       const { MongoClient, ServerApiVersion } = require('mongodb');
-      const uri = `mongodb+srv://${process.env.USER_NAME}:${process.env.USER_NAME}@cluster0.tkh65wh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+      const uri = `mongodb+srv://${process.env.USER_NAME}:${process.env.USER_PASS}@cluster0.tkh65wh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
       
       // Create a MongoClient with a MongoClientOptions object to set the Stable API version
       const client = new MongoClient(uri, {
@@ -26,6 +26,21 @@ app.use(cors());
       
       async function run() {
         try {
+          const productsCollection = client.db('SiphonsFashion').collection('products');
+          const reviewsCollection = client.db('SiphonsFashion').collection('reviews');
+
+                //  Get all products 
+          app.get('/products',async(req,res)=>{
+            const products = productsCollection.find();
+            const result = await products.toArray();
+            res.send(result);
+          })
+                  // Get all reviews 
+          app.get('/reviews',async(req,res)=>{
+            const reviews = reviewsCollection.find();
+            const result = await reviews.toArray();
+            res.send(result);
+          })
           // Connect the client to the server	(optional starting in v4.7)
           // await client.connect();
           // Send a ping to confirm a successful connection
